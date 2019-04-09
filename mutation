@@ -1,0 +1,12 @@
+def mutation(Individual_A):   
+ # We define the function for a mutation in a chromosome
+    chromosome_A=Individual_A.chromosome
+    for i in chromosome_A:
+        if random.uniform(0.0, 1.0) <= 0.08:   #revoir le coef au cas où
+        #dichotomie plus facile avec liste triée
+            List_element_possible=[x for x in L if x not in chromosome_A] #L c'est la liste initial de tout nos éléments
+            chromosome_A = chromosome_A[0:i + random.choice(List_element_possible) + chromosome_A[i+1:len(chromosome_A)]
+    
+    Individual_A.chromosome=chromosome_A
+    return(Individual_A)
+ 
