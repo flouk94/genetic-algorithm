@@ -8,3 +8,21 @@ class population:
 	def __init__(self,n,Liste_individu):
 		self.n = n
 		self.Liste_individu = Liste_individu
+
+
+def fitness(population) :
+    
+    for individual in population :
+        
+        individual.fitness=sum(individual)      #sum of the numbers of the list
+        
+    return population
+    
+def selection(population) :
+
+    #to select the best individuals, we class individuals population by fitness
+    
+    population = sorted(population, key=individual.fitness)
+    population = population[:int(0.1 * len(population))]
+    return population
+
