@@ -9,4 +9,17 @@ def mutation(Individual_A):
     
     Individual_A.chromosome=chromosome_A
     return(Individual_A)
- 
+
+version avec le chromosome qui contient des 0 et 1 
+def mutate_individual(individual):
+ # We define the function for a mutation in a chromosome	
+
+	n=len(individual.chromosome) #lenght chromosome
+
+	for idx in range (n):
+
+		if random.uniform(0.0, 1.0) <= 0.1:
+
+				individual.chromosome = individual.chromosome[0:idx] + [1-individual.chromosome[idx]] + individual.chromosome[idx+1:in_str_len] #0 replace by 1 and 1 replace by 0
+
+	return individual
