@@ -26,3 +26,17 @@ def mutate_individual(individual):
 				individual.chromosome = individual.chromosome[0:idx] + [1-individual.chromosome[idx]] + individual.chromosome[idx+1:in_str_len] #0 replace by 1 and 1 replace by 0
 
 	return individual
+
+
+
+
+def crossover(Individual_A,Individual_B):
+    n=len(Individual_A.chromosome)
+    child1=[]
+    child2=[]
+    split = random.randint(0, n)
+    child1=Individual_A.chromosome[0:split]+Individual_B.chromosome[split:n]
+    child2=Individual_B.chromosome[0:split]+Individual_A.chromosome[split:n]
+    Individual_A.chromosome=child1
+    Individual_B.chromosome=child2
+    return(Individual_A,Individual_B)
