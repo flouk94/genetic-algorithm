@@ -26,3 +26,12 @@ def selection(population) :
     population = population[:int(0.1 * len(population))]
     return population
 
+
+
+def create_new_list(L):
+    n=len(L)
+    L_new=[0]*n
+    for i in  range(n):
+        L_new[i]=L[0:i]+L[i+1:n]
+        population.Liste_individu=L_new
+    return(population)
