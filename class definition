@@ -222,7 +222,7 @@ def solution(L):
     population=create_new_list(L)
     S=test_sum(population)
     
-    for k in range(1000*len(L)):
+    for k in range(1000):
         
         population=algo_genetic_de_fou(population)
         A=test_sum(population)
