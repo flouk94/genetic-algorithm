@@ -247,6 +247,10 @@ def afficher_correctly(L):
         if T[k]!=0:
             
             LI.append(T[k])
+	    
+	if T[k]==0 and L[k]=0:
+	
+	    LI.append(T[k])
     
     n=len(LI)
     
