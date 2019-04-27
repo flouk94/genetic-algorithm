@@ -1,19 +1,30 @@
 # genetic-algorithm
 projet IN104
 
-import random
+ import random
+import time
+
+start_time = time.time()
+
+
 class Individual:
-	#we define the class individual with a chromosome which is a list of element
-	#and its fitness, it means is coefficient of being interessant for our problem
+	
+	#the individual is defined by its chromosome (list of 0 and 1) and its fitness (a score)
+	#to keep the best ones
+
 	def __init__(self,chromosome,fitness):
 		self.chromosome = chromosome
 		self.fitness = fitness
 
 class population:
-#we define the population with a list of list of element and n the number of list
+
+#the population is a list of n individuals 
+	
 	def __init__(self,n,Liste_individu):
 		self.n = n
 		self.Liste_individu = Liste_individu
+
+
 
 def create_new_list(L):
 
@@ -34,7 +45,10 @@ def create_new_list(L):
     population.n=n
     
     return (population)
-   
+
+
+
+
 def fitness(Individual):
 	#to define the fitness of a individual we define its fitness thanks to a function
 	k=0.5
@@ -51,7 +65,11 @@ def fitness(Individual):
 	Individual.fitness=k*S +(1-k)/(1+lenght)
 #we return the individual with its good fitness
 	return(Individual)
-	
+
+
+
+
+
 def crossover(Individual_A,Individual_B):
 	#we define a function of crossover where 2 chromosomes will mix 
 		n=len(Individual_A.chromosome)
@@ -75,18 +93,18 @@ def crossover(Individual_A,Individual_B):
 
 
 def mutate_individual(individual):
- # We define the function for a mutation in a chromosome	
+ # We implement the function for a mutation in a chromosome	
 
 	n=len(individual.chromosome) #lenght chromosome
 
-#for each element of a chromosome with look if we have a mutation or not
+# each element of a chromosome can randomly mutate
 	for idx in range (n):
 
+		if random.uniform(0.0, 1.0) <= (1/n): #1/n is the probability to have a change of each element
 
-		if random.uniform(0.0, 1.0) <= 1/n:
-
-				individual.chromosome = individual.chromosome[0:idx] + [1-(individual.chromosome[idx])] + individual.chromosome[idx+1:n] #0 replace by 1 and 1 replace by 0
-#we return the new individual with his mutations
+				individual.chromosome = individual.chromosome[0:idx] + [1-(individual.chromosome[idx])] + individual.chromosome[idx+1:n] 
+				#0 replaced by 1 and 1 replaced by 0
+	#we return the new individual with his mutations
 	return (individual)  
 
 
@@ -171,7 +189,7 @@ def selection(population):
 #SOLUTION=test_Somme(population)
 
 
-def algo_genetic_de_fou(population):
+def algo_genetic(population):
     n=len(population.Liste_individu)
 #    SOLUTION=test_Somme(population)
     d=int(10*n)
@@ -180,12 +198,13 @@ def algo_genetic_de_fou(population):
     for i in range(d):
         #we do mutations for d individuals
         a=random.randint(0,n-1)
+        #on choose some individuals ramdomly in the population
         IndividualX=Individual(population.Liste_individu[a],fitness)
         IndividualX=mutate_individual(IndividualX)
         population.Liste_individu[a]=IndividualX.chromosome
     
     for k in range(f):
-        #we do f crossover for a population
+        #we do f crossover for a population for random individual
         a=random.randint(0,n-1)
         b=random.randint(0,n-1)
         IndividualA=Individual(population.Liste_individu[a],fitness)
@@ -205,25 +224,36 @@ def algo_genetic_de_fou(population):
     
     return(population)
 
+#OUR PROGRAM has a problem with the zeros because it doesn't keep it for the final list
+#so we have to add them at the end
 
+#def zeros(L):
+ ##
+ #    for i in range(len(L)):
+#       if L[i]==0:
+#            S=S+1
+ #   return(S)
 
 
 def solution(L):
     
     population=create_new_list(L)
     S=test_sum(population)
+ #we create an initial population and we test it at the begining    
+    for k in range(10000):
     
-    for k in range(1000):
-        
-        population=algo_genetic_de_fou(population)
+    #we will do 10000 algo_gentic to change our population and we test it at the end of each one    
+        population=algo_genetic(population)
         A=test_sum(population)
-        
+        #if we found a better solution we replace it
         if sum(A)>sum(S):
             S=A
     
     n=len(S)
     
     for i in range(n):
+
+    	#then when we have found our best solution we multpliate each 0and 1 of our solution with the list L
         
         S[i]=S[i]*L[i]
     
@@ -233,19 +263,34 @@ def afficher_correctly(L):
     T=solution(L)
     LI=[]
     
+    # to show correctly our solution we delete the zeros that are useless but we keep the zeros of the list L
     for k in range(len(T)):
        
         if T[k]!=0:
             
             LI.append(T[k])
-	    
-	if T[k]==0 and L[k]=0:
-	
-	    LI.append(T[k])
+        
+        if T[k]==0 and L[k]==0:
+            
+            LI.append(T[k])
     
     n=len(LI)
-    
+    #we return the final result and its lenght
     return(LI,n)
 
-L=[-5,4,3,2,8,-4,-1,3,8,9,-2,-3,-34,21,89,55,49,8,26,76,93,-87,-1000,-234,-334,-571,-971,-202,-467,762,234,567,902,2034,45,652,297,-123,-12,-19,-56,2,-30]
+
+L = [random.randrange(-100000, 100000) for i in range(5000)]
+
 print(afficher_correctly(L))
+print("Temps d execution : %s secondes ---" % (time.time() - start_time))
+
+
+
+def ameliorate_moyenne(L,nb):
+	S=0
+	A=[]
+	for k in range(nb):
+		(A,a)=afficher_correctly(L)
+		S=S+a
+	S=S/nb
+	return(S)
