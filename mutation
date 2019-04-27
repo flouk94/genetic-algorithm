@@ -5,8 +5,64 @@ def mutation(Individual_A):
         if random.uniform(0.0, 1.0) <= 0.08:   #revoir le coef au cas où
         #dichotomie plus facile avec liste triée
             List_element_possible=[x for x in L if x not in chromosome_A] #L c'est la liste initial de tout nos éléments
-            chromosome_A = chromosome_A[0:i + random.choice(List_element_possible) + chromosome_A[i+1:len(chromosome_A)]
+            chromosome_A = chromosome_A[0:i] + [random.choice(List_element_possible)] + chromosome_A[i+1:len(chromosome_A)]
     
     Individual_A.chromosome=chromosome_A
     return(Individual_A)
- 
+
+version avec le chromosome qui contient des 0 et 1 
+
+
+
+def mutate_individual(individual):
+ # We define the function for a mutation in a chromosome	
+
+	n=len(individual.chromosome) #lenght chromosome
+
+	for idx in range (n):
+
+		if random.uniform(0.0, 1.0) <= 0.1:
+		
+
+				individual.chromosome = individual.chromosome[0:idx] + [1-individual.chromosome[idx]] + individual.chromosome[idx+1:in_str_len] #0 replace by 1 and 1 replace by 0
+
+	return individual
+
+
+
+
+
+
+def crossover(Individual_A,Individual_B):
+    n=len(Individual_A.chromosome)
+    child1=[]
+    child2=[]
+    split = random.randint(0, n)
+    child1=Individual_A.chromosome[0:split]+Individual_B.chromosome[split:n]
+    child2=Individual_B.chromosome[0:split]+Individual_A.chromosome[split:n]
+    Individual_A.chromosome=child1
+    Individual_B.chromosome=child2
+    return(Individual_A,Individual_B)
+    
+    
+    
+    
+    
+   def create_new_list(L):
+    n=len(L)
+    Liste_individu=[]
+    for i in range(2*n):
+        List=[]
+        for k in range(n):
+            List.append(random.randint(0,1))
+        Liste_individu.append(List)
+    population.Liste_individu=Liste_individu
+    population.n=n
+    return (population)
+
+print(create_new_list(L))
+
+
+
+
+
