@@ -1,7 +1,7 @@
 # genetic-algorithm
 projet IN104
 
- import random
+import random
 import time
 
 start_time = time.time()
@@ -116,6 +116,7 @@ def test_sum( population ):
 #we define a function test to test if in the population we have a candidate to solve our problem
 #and if we have two possible candidates with a sum=0 we compare their length and we keep the one
 #with the biggest lenght	
+
     max=0
     i=0
     l=0
@@ -125,21 +126,18 @@ def test_sum( population ):
     S=0
     
     for k in range(q):
-        #we do 2 boucles for to calculate the sum of each individu 
-        
         for p in range(n):
             S=S+(population.Liste_individu[k][p])*L[p]
-        
-        
-        if S==0:
-            Sol_possible.append(population.Liste_individu[k])
-            l=l+1
+            if S==0:
+                Sol_possible.append(population.Liste_individu[k])
+                l=l+1
          #if the sum=0 this is a possible candidate, now we compare
 #him to the other by the length  
             
-            if sum(population.Liste_individu[k])>max:
-                max=sum(population.Liste_individu[k])
+                if sum(population.Liste_individu[k])>=max:
+                    max=sum(population.Liste_individu[k])
                 i=l
+            S=0
     if i==0:
     	return([0]*n)
 #we return the best candidate in the population that we have
@@ -276,6 +274,7 @@ def afficher_correctly(L):
     
     n=len(LI)
     #we return the final result and its lenght
+    print("les solutions sont:")
     return(LI,n)
 
 
