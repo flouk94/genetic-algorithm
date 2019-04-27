@@ -34,3 +34,20 @@ def create_new_list(L):
     population.n=n
     
     return (population)
+   
+def fitness(Individual):
+	#to define the fitness of a individual we define its fitness thanks to a function
+	k=0.5
+	chromosome=Individual.chromosome
+	S=0
+	lenght=0
+	
+#the fitness is coefficient that depends of the lenght and the sum of a chromosome
+	for i in range(len(chromosome)):
+		S=S+chromosome[i]*L[i]
+		lenght=lenght+chromosome[i]
+#we calcul S and lenght and we add a coefficient k that we can change 
+#to take in count more the sum or the lenght
+	Individual.fitness=k*S +(1-k)/(1+lenght)
+#we return the individual with its good fitness
+	return(Individual)
