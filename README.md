@@ -62,7 +62,7 @@ def fitness(Individual):
 		lenght=lenght+chromosome[i]
 #we calcul S and lenght and we add a coefficient k that we can change 
 #to take in count more the sum or the lenght
-	Individual.fitness=k*S**2 +(1-k)/(1+lenght)
+	Individual.fitness=abs(k*S**2 +(1-k)/(1+lenght))
 #we return the individual with its good fitness
 	return(Individual)
 
@@ -164,7 +164,7 @@ def selection(population):
     m=0
     List_new_individu=[]
     
-    while m<(n/4):
+    while m<(n/10):
     #now we choose only one quart of this population, the ones with a great fitness
     #and we put the elements in an other list of individu	
     	idx=List_fit.index(min(List_fit))
