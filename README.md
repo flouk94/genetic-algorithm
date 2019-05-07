@@ -181,7 +181,7 @@ def selection(population):
     return(population)
     
     
-    
+Moyennefitness=[]  
     
     
 #SOLUTION=test_Somme(population)
@@ -216,7 +216,7 @@ def algo_genetic(population):
         IndividualY=Individual(population.Liste_individu[i],fitness)
         IndividualY=fitness(IndividualY)
         List_fit[i]=IndividualY.fitness
-    
+    Moyennefitness.append(min(List_fit))
     population=selection(population)
     #we selection the individu of the population that we like
     
@@ -293,3 +293,10 @@ def ameliorate_moyenne(L,nb):
 		S=S+a
 	S=S/nb
 	return(S)
+	
+	
+X = np.linspace(0,1000 , 1000)
+plt.plot(X,Moyennefitness)
+
+plt.show()
+
