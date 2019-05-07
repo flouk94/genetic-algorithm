@@ -62,7 +62,7 @@ def fitness(Individual):
 		lenght=lenght+chromosome[i]
 #we calcul S and lenght and we add a coefficient k that we can change 
 #to take in count more the sum or the lenght
-	Individual.fitness=k*S +(1-k)/(1+lenght)
+	Individual.fitness=k*S**2 +(1-k)/(1+lenght)
 #we return the individual with its good fitness
 	return(Individual)
 
