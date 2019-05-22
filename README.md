@@ -109,8 +109,6 @@ def mutate_individual(individual):
 
 
 
-
-
 def test_sum( population ):
 
 #we define a function test to test if in the population we have a candidate to solve our problem
@@ -123,25 +121,26 @@ def test_sum( population ):
     n=len(population.Liste_individu[0])
     Sol_possible=[]
     q=population.n
-    S=0
+    
     
     for k in range(q):
+        S=0
         for p in range(n):
             S=S+(population.Liste_individu[k][p])*L[p]
-            if S==0:
-                Sol_possible.append(population.Liste_individu[k])
-                l=l+1
+        if S==0:
+            Sol_possible.append(population.Liste_individu[k])
+            l=l+1
          #if the sum=0 this is a possible candidate, now we compare
-#him to the other by the length  
-            
-                if sum(population.Liste_individu[k])>=max:
-                    max=sum(population.Liste_individu[k])
-                i=l
-            S=0
+#him to the other by the length 
+        if sum(population.Liste_individu[k])>=max:
+            max=sum(population.Liste_individu[k])
+            i=l
+        S=0
     if i==0:
-    	return([0]*n)
+        return([])
 #we return the best candidate in the population that we have
     return(Sol_possible[i-1])
+
 
 
 
