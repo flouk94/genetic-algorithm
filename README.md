@@ -163,7 +163,7 @@ def selection(population):
     m=0
     List_new_individu=[]
     
-    while m<(n/10):
+    while m<(n/5):
     #now we choose only one quart of this population, the ones with a great fitness
     #and we put the elements in an other list of individu	
     	idx=List_fit.index(min(List_fit))
@@ -277,7 +277,7 @@ def afficher_correctly(L):
     return(LI,n)
 
 
-L = [random.randrange(-100000, 100000) for i in range(5000)]
+L = [random.randrange(-1000, 1000) for i in range(100)]
 
 print(afficher_correctly(L))
 print("Temps d execution : %s secondes ---" % (time.time() - start_time))
@@ -299,3 +299,8 @@ plt.plot(X,Moyennefitness)
 
 plt.show()
 
+
+
+
+
+#with these features you do 10 000 generatiosn, the selection' coefficient is 1/5.
